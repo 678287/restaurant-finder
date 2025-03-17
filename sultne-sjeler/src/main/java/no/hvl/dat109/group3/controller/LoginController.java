@@ -55,5 +55,5 @@ public class LoginController {
 		LoginUtil.loggInnBruker(request, phone, password);
 		
 		return "redirect:confirmation";
-	} //end tryLogin
+	} //end tryLogin //tests
 }
