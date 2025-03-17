@@ -18,7 +18,7 @@
     <p style="color:red;">${redirectMessage}</p>
                 
         
-        
+        <fieldset>
             <form id="skjema" action="tryLogin" method="post">
                 <label for="phone">Phone number:</label>
                 <input type="number" name="phone" id="phone"><br>
@@ -26,7 +26,7 @@
                 <input type="password" name="password" id="password"><br>
                 <input type="submit" value="Log in">
             </form>   
-    
+        </fieldset>
     
 </body>
 </html>

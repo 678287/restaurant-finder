@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
-import no.hvl.dat109.group3.model.User;
+import no.hvl.dat109.group3.model.Users;
 import no.hvl.dat109.group3.repository.UserRepository;
 import no.hvl.dat109.group3.service.PasswordService;
 import no.hvl.dat109.group3.util.InputValidator;
@@ -45,7 +45,7 @@ public class LoginController {
 	public String tryLogin(@RequestParam String phone, @RequestParam String password,
 			HttpServletRequest request, RedirectAttributes ra) {
 		
-		User user = userRepo.findByPhone(phone);
+		Users user = userRepo.findByPhone(phone);
 		
 		if(!InputValidator.isValidUsername(phone) || !passwordService.erKorrektPassord(password, user.getSalt(), user.getPasswordhash())) {
 			ra.addFlashAttribute("redirectMessage", "Username and/or password is not valid.");
@@ -54,6 +54,6 @@ public class LoginController {
 		
 		LoginUtil.loggInnBruker(request, phone, password);
 		
-		return "redirect:hjemmeside";
+		return "redirect:confirmation";
 	} //end tryLogin
 }

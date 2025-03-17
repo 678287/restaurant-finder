@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(schema = "user_schema")
-public class User {
+public class Users {
 	
 	@Id
 	@Pattern(regexp = "^[0-9]{8}$", message="Phone number must be exactly 8 digits")
@@ -19,7 +19,11 @@ public class User {
 	
 	private String passwordhash;
 	
-	public User() {}
+	public Users() {}
+	
+	public Users(String phone) {
+		this.phone = phone;
+	}
 	
 	public String getPhone() {
 		return phone;
@@ -45,9 +49,7 @@ public class User {
 		this.passwordhash = passwordhash;
 	}
 
-	public User(String phone) {
-		this.phone = phone;
-	}
+	
 	
 	
 }
