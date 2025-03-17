@@ -15,6 +15,17 @@
 <body>
     
     <h2>Login</h2>
+    <p style="color:red;">${redirectMessage}</p>
+                
+        
+        
+            <form id="skjema" action="tryLogin" method="post">
+                <label for="phone">Phone number:</label>
+                <input type="number" name="phone" id="phone"><br>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password"><br>
+                <input type="submit" value="Log in">
+            </form>   
     
     
 </body>

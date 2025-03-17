@@ -1,12 +1,18 @@
 package no.hvl.dat109.group3.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(schema = "user_schema")
 public class User {
 	
+	@Id
+	@Pattern(regexp = "^[0-9]{8}$", message="Phone number must be exactly 8 digits")
+	@NotNull(message="Phone number is obligatory")
 	private String phone;
 	
 	private String salt;

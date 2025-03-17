@@ -27,7 +27,7 @@ public class LoginController {
 	 * A GET-Mapping to show the form for user login
 	 * @return login.jsp - the view for user login
 	 */
-	@GetMapping
+	@GetMapping("/login")
 	public String getLoginForm() {
 		return "login";
 	} //end getLoginForm
@@ -41,7 +41,7 @@ public class LoginController {
 	 * @param ra RedirectAttributes
 	 * @return redirect:login if invalid data, redirect:hjemmeside if valid data
 	 */
-	@PostMapping
+	@PostMapping("/tryLogin")
 	public String tryLogin(@RequestParam String phone, @RequestParam String password,
 			HttpServletRequest request, RedirectAttributes ra) {
 		
