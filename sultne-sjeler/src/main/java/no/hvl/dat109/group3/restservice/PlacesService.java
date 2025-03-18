@@ -15,6 +15,8 @@ public class PlacesService {
 
 	private final String API_KEY = "AIzaSyAmRg7cpF8lrgX8jxDu56ZQ_QFSJe8rPLw";
 	private final String TEXT_URL = "https://places.googleapis.com/v1/places:searchText";
+	private final String NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby";
+	
 	
 	private final RestTemplate restTemplate;
 	private final ObjectMapper objectMapper;
@@ -53,5 +55,40 @@ public class PlacesService {
         }
 
 	}
+	
+	public JsonNode searchNearby(double lat, double lon) {
+	    // Request body in JSON format
+		String requestBody = "{ " +
+		        "\"includedTypes\": [\"restaurant\"], " + 
+		        "\"maxResultCount\": 20, " + // Limit to 20 places
+		        "\"locationRestriction\": { " + 
+		            "\"circle\": { " +
+		                "\"center\": { " +
+		                    "\"latitude\": " + lat + ", " +
+		                    "\"longitude\": " + lon +
+		                "}, " +
+		                "\"radius\": 1500.0 " + // Search radius in meters
+		            "} " +
+		        "} " +
+		    "}";
+
+	    // Sets up headers
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("Content-Type", "application/json");
+	    headers.set("X-Goog-Api-Key", API_KEY);
+	    headers.set("X-Goog-FieldMask", "places.displayName");
+
+	  
+	    HttpEntity<String> entity = new HttpEntity<>(requestBody, headers); // Wraps the request body and headers
+	    ResponseEntity<String> response = restTemplate.exchange(NEARBY_URL, HttpMethod.POST, entity, String.class); // Sends the POST request and retrieves the API response
+
+	    // Parse and return JSON response
+	    try {
+	        return objectMapper.readTree(response.getBody());
+	    } catch (Exception e) {
+	        throw new RuntimeException("Failed to parse API response", e);
+	    }
+	}
+
 	
 }
