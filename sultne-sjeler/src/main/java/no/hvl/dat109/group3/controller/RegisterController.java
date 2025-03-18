@@ -61,6 +61,17 @@ public class RegisterController {
 		return "confirmation";
 	}
 	
+	
+	/**
+	 * A POST-mapping to register a new user and save the user to the database
+	 * @param user The user to be saved
+	 * @param bindingResult Parameter for databinding
+	 * @param password The password for the user
+	 * @param passwordRepeated The repeated password for the user
+	 * @param ra RedirectAttrbiutes
+	 * @param request HttpServletRequest
+	 * @return confirmation.jsp - the view confirming a successful registration
+	 */
 	@PostMapping("/submitregistration")
 	public String submitRegistration(@Valid @ModelAttribute("users") Users user, BindingResult bindingResult,
 			@RequestParam String password, @RequestParam String passwordRepeated, RedirectAttributes ra, HttpServletRequest request) {
