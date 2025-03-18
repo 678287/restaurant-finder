@@ -15,6 +15,10 @@
 <body>
     
     <h2>Hjemmeside</h2>
+    <form id="skjema" action="places/search" method="get">
+            <input type="text" name="query" placeholder="Søk etter restauranter">
+            <input type="submit" value="Search">
+    </form>
     
     
 </body>

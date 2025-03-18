@@ -29,7 +29,7 @@ public class PlacesService {
 		// Sets up the JSON request body dynamically with the query input, filtering to only include restaurants
 		String requestBody = "{ " +
                 "\"textQuery\": \"" + query + "\", " +
-                "\"includedTypes\": [\"restaurant\"], " +
+                "\"includedType\": \"restaurant\", " +
                 "\"maxResultCount\": 20 " +
                 "}";
         
