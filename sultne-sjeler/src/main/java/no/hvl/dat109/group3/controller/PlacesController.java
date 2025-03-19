@@ -1,6 +1,8 @@
 package no.hvl.dat109.group3.controller;
 
-
+/**
+ * A controller class for controlling the service handling the "Places API"
+ */
 
 import java.util.List;
 
@@ -28,6 +30,12 @@ public class PlacesController {
 	}
 	
 	
+	/**
+	 * A GET-mapping to handle textbased searches
+	 * @param query The text input by the user
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
 	@GetMapping("/searchText")
 	public String searchText(@RequestParam String query, Model model) {
 		List<Place> places = placesService.searchByText(query);
@@ -35,8 +43,17 @@ public class PlacesController {
 		model.addAttribute("places", places);
 		
 		return "listeresultat";
-	}
+	} //end searchText
 	
+	
+	/**
+	 * A GET-mapping to search for all nearby restaurants
+	 * @param lat The latitude of the user location
+	 * @param lon The longitude of the user location
+	 * @param radius The radius for the search
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
 	@GetMapping("/searchNearby")
 	public String searchNearby(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model){
 		
@@ -45,8 +62,17 @@ public class PlacesController {
 	    model.addAttribute("places", places);
 	    
 	    return "listeresultat";
-	}
+	} //end searchNearby
 	
+	
+	/**
+	 * A GET-mapping to generate a random suggestion for the user
+	 * @param lat The latitude of the user location
+	 * @param lon The longitude of the user location
+	 * @param radius The radius for the search
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
 	@GetMapping("/getRandom")
 	public String getRandom(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
 		
@@ -55,6 +81,6 @@ public class PlacesController {
 		model.addAttribute("place", randomPlace);
 		
 		return "randomresultat";
-	}
+	} //end getRandom
 
 }

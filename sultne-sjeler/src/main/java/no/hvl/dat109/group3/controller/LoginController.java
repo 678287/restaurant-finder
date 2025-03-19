@@ -1,5 +1,7 @@
 package no.hvl.dat109.group3.controller;
-
+/**
+ * A controller class to handle logins
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

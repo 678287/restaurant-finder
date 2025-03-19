@@ -1,5 +1,7 @@
 package no.hvl.dat109.group3.repository;
-
+/**
+ * A repository class for handling users in the database
+ */
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -14,5 +16,10 @@ public interface UserRepository extends JpaRepository<Users, String> {
 	 */
 	Users findByPhone(String phone);
 	
+	/**
+	 * Checks if a user is already registered by the given phone number
+	 * @param phone the phone number to check
+	 * @return true if a user already exists with that number, false if not
+	 */
 	boolean existsByPhone(String phone);
 }

@@ -1,5 +1,7 @@
 package no.hvl.dat109.group3.restservice;
-
+/**
+ * A service class to handle API calls to Places API.
+ */
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
@@ -38,6 +40,11 @@ public class PlacesService {
 		this.objectMapper = objectMapper;
 	}
 	
+	/**
+	 * A method for searching by text input
+	 * @param query The text input by the user
+	 * @return A list of places
+	 */
 	public List<Place> searchByText(String query) {
 		
 		// Sets up the JSON request body dynamically with the query input, filtering to only include restaurants
@@ -67,8 +74,17 @@ public class PlacesService {
 	        throw new RuntimeException("Failed to parse API response", e);
 	    }
 
-	}
+	} // end searchByText
 	
+	
+	
+	/**
+	 * A method for showing all nearby restaurants
+	 * @param latitude The latitude of the user location
+	 * @param longitude The longitude of the user location
+	 * @param radius The radius for the search
+	 * @return A list of places
+	 */
 	public List<Place> searchNearby(String latitude, String longitude, String radius) {
 		
 		double lat = Double.parseDouble(latitude);
@@ -106,8 +122,17 @@ public class PlacesService {
 	    } catch (Exception e) {
 	        throw new RuntimeException("Failed to parse API response", e);
 	    }
-	}
+	} //end searchNearby
 	
+	
+	
+	/**
+	 * A method to generate a random suggestion for a restaurant near the user
+	  * @param latitude The latitude of the user location
+	 * @param longitude The longitude of the user location
+	 * @param radius The radius for the search
+	 * @return A random place
+	 */
 	public Place getRandom(String latitude, String longitude, String radius) {
 		
 		List<Place> places = searchNearby(latitude, longitude, radius);
@@ -117,9 +142,15 @@ public class PlacesService {
 		
 		return places.get(i);
 		
-	}
+	} //end getRandom
 	
 	
+	
+	/**
+	 * A utility method for convering from a JsonNode to a list of POJOs
+	 * @param jsonNode
+	 * @return A list of Places
+	 */
 	private List<Place> convertJsonToPlaces(JsonNode jsonNode) {
 	    if (jsonNode.has("places")) {
 	        try {
@@ -132,7 +163,7 @@ public class PlacesService {
 	        }
 	    }
 	    return List.of();
-	}
+	} //end convertJsonToPlaces
 	
 	
 	

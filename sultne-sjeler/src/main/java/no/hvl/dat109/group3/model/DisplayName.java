@@ -1,4 +1,7 @@
 package no.hvl.dat109.group3.model;
+/**
+ * An entity class to handle the format of DisplayName when converting from JSON to POJO
+ */
 
 public class DisplayName {
     private String text;

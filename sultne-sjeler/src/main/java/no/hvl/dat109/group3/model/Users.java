@@ -1,5 +1,8 @@
 package no.hvl.dat109.group3.model;
 
+/**
+ * An entity class for registering and saving users
+ */
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
