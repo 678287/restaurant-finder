@@ -1,5 +1,7 @@
 package no.hvl.dat109.group3.restservice;
 
+import java.util.List;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -7,15 +9,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import no.hvl.dat109.group3.model.Place;
 
 @Service
 public class PlacesService {
 
 	private final String API_KEY = "AIzaSyAmRg7cpF8lrgX8jxDu56ZQ_QFSJe8rPLw";
+	
+	// The API call URL for textbased searches
 	private final String TEXT_URL = "https://places.googleapis.com/v1/places:searchText";
+	
+	// The API call URL for nearby searches
 	private final String NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby";
+	
+	// The url for included fields in search results
+	private final String FIELD_MASK = "places.displayName,places.formattedAddress,places.rating,places.priceRange,places.primaryType";
 	
 	
 	private final RestTemplate restTemplate;
@@ -26,7 +38,7 @@ public class PlacesService {
 		this.objectMapper = objectMapper;
 	}
 	
-	public JsonNode searchByText(String query) {
+	public List<Place> searchByText(String query) {
 		
 		// Sets up the JSON request body dynamically with the query input, filtering to only include restaurants
 		String requestBody = "{ " +
@@ -39,7 +51,7 @@ public class PlacesService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json"); // Sets content type to JSON, as Places API expects JSON
         headers.set("X-Goog-Api-Key", API_KEY); // Submits our API key
-        headers.set("X-Goog-FieldMask", "places.displayName,places.formattedAddress"); // Specifies which fields we want in the response: change after things work
+        headers.set("X-Goog-FieldMask", FIELD_MASK); // Specifies which fields we want in the response: change after things work
         
         
         
@@ -49,14 +61,15 @@ public class PlacesService {
         
         // Attempts to use ObjectMapper.readTree() to parse the response body into a JSON tree structure
         try {
-        	return objectMapper.readTree(response.getBody());
-        } catch (Exception e) {
-        	throw new RuntimeException("Failed to parse API response", e);
-        }
+	        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+	        return convertJsonToPlaces(jsonNode);
+	    } catch (Exception e) {
+	        throw new RuntimeException("Failed to parse API response", e);
+	    }
 
 	}
 	
-	public JsonNode searchNearby(String latitude, String longitude) {
+	public List<Place> searchNearby(String latitude, String longitude) {
 		
 		double lat = Double.parseDouble(latitude);
 		double lon = Double.parseDouble(longitude);
@@ -80,7 +93,7 @@ public class PlacesService {
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.set("Content-Type", "application/json");
 	    headers.set("X-Goog-Api-Key", API_KEY);
-	    headers.set("X-Goog-FieldMask", "places.displayName");
+	    headers.set("X-Goog-FieldMask", FIELD_MASK);
 
 	  
 	    HttpEntity<String> entity = new HttpEntity<>(requestBody, headers); // Wraps the request body and headers
@@ -88,11 +101,34 @@ public class PlacesService {
 
 	    // Parse and return JSON response
 	    try {
-	        return objectMapper.readTree(response.getBody());
+	        JsonNode jsonNode = objectMapper.readTree(response.getBody());
+	        return convertJsonToPlaces(jsonNode);
 	    } catch (Exception e) {
 	        throw new RuntimeException("Failed to parse API response", e);
 	    }
 	}
+	
+	/*public JsonNode giveRandom(String latitude, String longitude) {
+		
+	}*/
+	
+	
+	private List<Place> convertJsonToPlaces(JsonNode jsonNode) {
+	    if (jsonNode.has("places")) {
+	        try {
+	            return objectMapper.readValue(
+	                jsonNode.get("places").toString(),
+	                new TypeReference<List<Place>>() {}
+	            );
+	        } catch (Exception e) {
+	            throw new RuntimeException("Error converting JSON to POJO", e);
+	        }
+	    }
+	    return List.of();
+	}
+	
+	
+	
 
 	
 }

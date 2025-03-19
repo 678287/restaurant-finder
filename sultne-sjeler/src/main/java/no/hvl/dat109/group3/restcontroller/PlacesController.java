@@ -2,19 +2,20 @@ package no.hvl.dat109.group3.restcontroller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
+import no.hvl.dat109.group3.model.Place;
 import no.hvl.dat109.group3.restservice.PlacesService;
 
-@RestController
+@Controller
 @RequestMapping("/places")
 @CrossOrigin(origins = "http://localhost:8080") // Allow frontend calls
 public class PlacesController {
@@ -33,9 +34,13 @@ public class PlacesController {
 	}
 	
 	@GetMapping("/searchNearby")
-	public Object searchNearby(@RequestParam String lat, @RequestParam String lon){
+	public Object searchNearby(@RequestParam String lat, @RequestParam String lon, Model model){
 		
-        return placesService.searchNearby(lat, lon);
+		List<Place> places = placesService.searchNearby(lat, lon);
+		
+	    model.addAttribute("places", places);
+	    
+	    return "listeresultat";
 	}
 
 }

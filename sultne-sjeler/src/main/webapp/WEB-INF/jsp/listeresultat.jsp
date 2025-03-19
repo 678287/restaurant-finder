@@ -15,6 +15,14 @@
 <body>
     
     <h2>Listeresultat</h2>
+ 
+    <ul>
+        
+        <c:forEach var="place" items="${places}">
+            <li>${place.displayName.text} - ${place.rating}⭐</li>
+        </c:forEach>
+
+    </ul>
     
     
 </body>
