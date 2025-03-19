@@ -19,10 +19,12 @@
    
     <form id="textForm" action="places/searchText" method="get">
             <input type="text" name="query" placeholder="Søk etter restauranter">
-            <input type="submit" value="Search">
-    </form>
-    <button onclick="getLocation('searchNearby')">Show nearby restaurants</button>
-    <button onclick="getLocation('getRandom')">Suggest a random restaurant</button>
+            <input type="submit" value="Søk">
+    </form><br>
+    <label for="radius">Radius (m) for restauranter nær deg:</label><br>
+    <input type="number" id="radius" placeholder="Meter">
+    <button onclick="getLocation('searchNearby')">Vis restauranter nær deg</button><br><br>
+    <button onclick="getLocation('getRandom')">Foreslå en tilfeldig restaurant</button>
     <script>
         
         function success(position, actionType){
@@ -64,6 +66,12 @@
             lonInput.name = "lon";
             lonInput.value = longitude;
             form.appendChild(lonInput);
+            
+            const radiusInput = document.createElement("input");
+            radiusInput.type = "hidden";
+            radiusInput.name = "radius"
+            radiusInput.value = document.getElementById("radius").value;
+            form.appendChild(radiusInput);
             
             document.body.appendChild(form);
             form.submit();

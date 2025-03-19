@@ -38,9 +38,9 @@ public class PlacesController {
 	}
 	
 	@GetMapping("/searchNearby")
-	public String searchNearby(@RequestParam String lat, @RequestParam String lon, Model model){
+	public String searchNearby(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model){
 		
-		List<Place> places = placesService.searchNearby(lat, lon);
+		List<Place> places = placesService.searchNearby(lat, lon, radius);
 		
 	    model.addAttribute("places", places);
 	    
@@ -48,9 +48,9 @@ public class PlacesController {
 	}
 	
 	@GetMapping("/getRandom")
-	public String getRandom(@RequestParam String lat, @RequestParam String lon, Model model) {
+	public String getRandom(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
 		
-		Place randomPlace = placesService.getRandom(lat, lon);
+		Place randomPlace = placesService.getRandom(lat, lon, radius);
 		
 		model.addAttribute("place", randomPlace);
 		

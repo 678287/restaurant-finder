@@ -69,7 +69,7 @@ public class PlacesService {
 
 	}
 	
-	public List<Place> searchNearby(String latitude, String longitude) {
+	public List<Place> searchNearby(String latitude, String longitude, String radius) {
 		
 		double lat = Double.parseDouble(latitude);
 		double lon = Double.parseDouble(longitude);
@@ -84,7 +84,7 @@ public class PlacesService {
 		                    "\"latitude\": " + lat + ", " +
 		                    "\"longitude\": " + lon +
 		                "}, " +
-		                "\"radius\": 5000.0 " + // Search radius in meters
+		                "\"radius\": " + radius +   // Search radius in meters
 		            "} " +
 		        "} " +
 		    "}";
@@ -108,9 +108,9 @@ public class PlacesService {
 	    }
 	}
 	
-	public Place getRandom(String latitude, String longitude) {
+	public Place getRandom(String latitude, String longitude, String radius) {
 		
-		List<Place> places = searchNearby(latitude, longitude);
+		List<Place> places = searchNearby(latitude, longitude, radius);
 		
 		int range = places.size() - 0 + 1;
 		int i = (int)(Math.random() * range) + 1;
