@@ -33,16 +33,9 @@ public class PlacesController {
 	}
 	
 	@GetMapping("/searchNearby")
-	public ResponseEntity<?> searchNearby(@RequestParam String lat, @RequestParam String lon){
+	public Object searchNearby(@RequestParam String lat, @RequestParam String lon){
 		
-		System.out.println("Received request: lat=" + lat + ", lon=" + lon); // Debug log
-
-	    if (lat == null || lon == null) {
-	        return ResponseEntity.badRequest().body("Latitude and Longitude are required.");
-	    }
-		
-        JsonNode result = placesService.searchNearby(lat, lon);
-        return ResponseEntity.ok(result);
+        return placesService.searchNearby(lat, lon);
 	}
 
 }

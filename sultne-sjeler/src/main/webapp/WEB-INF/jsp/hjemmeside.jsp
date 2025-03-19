@@ -15,41 +15,53 @@
 <body>
     
     <h2>Hjemmeside</h2>
-    <button onclick="getLocation()">Get My Location</button>
-    <p id="currentLocation"></p>
-    <form id="locationForm" action="places/searchNearby" method="get">  
-        <input type="submit" value="Show restaurants">
-    </form>
+    
+   
     <form id="textForm" action="places/searchText" method="get">
             <input type="text" name="query" placeholder="Søk etter restauranter">
             <input type="submit" value="Search">
     </form>
+    <button onclick="getLocation()">Show nearby restaurants</button>
     <script>
         
         function success(position){
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
+            
             const url = new URL("http://localhost:8080/places/searchNearby")
             url.searchParams.append("lat", latitude);
             url.searchParams.append("lon", longitude);
-             //const url = `http://localhost:8080/places/searchNearby?lat=${latitude}&lon=${longitude}`
-            
+     
+            console.log(latitude);       
             console.log(longitude);
-            console.log(latitude);
-            console.log(url);
             console.log(url.href);
             
             if (latitude == null || longitude == null) {
                     console.error("Latitude or longitude is null/undefined.");
                     return;
                 }
+                
+            // Creates a hidden form to handle submission of geolocation to controller
+            const form = document.createElement("form");
+            form.method = "GET";
+            form.action = "/places/searchNearby"; // Path to Spring Boot controller method
             
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    document.getElementById("currentLocation").innerText = JSON.stringify(data, null, 2);
-                })
-                .catch((error) => console.error("Error:", error)); 
+            const latInput = document.createElement("input");
+            latInput.type = "hidden";
+            latInput.name = "lat";
+            latInput.value = latitude;
+            form.appendChild(latInput);
+            
+            const lonInput = document.createElement("input");
+            lonInput.type = "hidden";
+            lonInput.name = "lon";
+            lonInput.value = longitude;
+            form.appendChild(lonInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+            
+            
             }
             
         function error(){
