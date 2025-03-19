@@ -47,9 +47,14 @@ public class PlacesController {
 	    return "listeresultat";
 	}
 	
-	/*@GetMapping("/getRandom")
+	@GetMapping("/getRandom")
 	public String getRandom(@RequestParam String lat, @RequestParam String lon, Model model) {
 		
-	}*/
+		Place randomPlace = placesService.getRandom(lat, lon);
+		
+		model.addAttribute("place", randomPlace);
+		
+		return "randomresultat";
+	}
 
 }

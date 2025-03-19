@@ -21,20 +21,25 @@
             <input type="text" name="query" placeholder="Søk etter restauranter">
             <input type="submit" value="Search">
     </form>
-    <button onclick="getLocation()">Show nearby restaurants</button>
+    <button onclick="getLocation('searchNearby')">Show nearby restaurants</button>
+    <button onclick="getLocation('getRandom')">Suggest a random restaurant</button>
     <script>
         
-        function success(position){
+        function success(position, actionType){
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             
-            const url = new URL("http://localhost:8080/places/searchNearby")
-            url.searchParams.append("lat", latitude);
-            url.searchParams.append("lon", longitude);
+            // Determine the endpoint based on button clicked
+            let actionUrl = "/places/";
+            if (actionType === "searchNearby") {
+                actionUrl += "searchNearby";
+            } else if (actionType === "getRandom") {
+                 actionUrl += "getRandom"; 
+            }
      
             console.log(latitude);       
             console.log(longitude);
-            console.log(url.href);
+            console.log(actionUrl.href);
             
             if (latitude == null || longitude == null) {
                     console.error("Latitude or longitude is null/undefined.");
@@ -44,7 +49,9 @@
             // Creates a hidden form to handle submission of geolocation to controller
             const form = document.createElement("form");
             form.method = "GET";
-            form.action = "/places/searchNearby"; // Path to Spring Boot controller method
+            form.action = actionUrl; // Path to Spring Boot controller method
+            
+           
             
             const latInput = document.createElement("input");
             latInput.type = "hidden";
@@ -69,11 +76,13 @@
         }
         
         
-        function getLocation() {
+        function getLocation(actionType) {
             if(!navigator.geolocation){
                 document.getElementById("currentLocation").innerText = "Geolocation is not supported by your browser";
             } else {
-                navigator.geolocation.getCurrentPosition(success, error);
+                navigator.geolocation.getCurrentPosition(
+                                (position) => success(position, actionType), 
+                                error);
             }
            
         } 
