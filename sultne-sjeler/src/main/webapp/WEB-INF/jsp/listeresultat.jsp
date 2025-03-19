@@ -19,7 +19,7 @@
     <ul>
         
         <c:forEach var="place" items="${places}">
-            <li>${place.displayName.text} - ${place.rating}⭐</li>
+            <li>${place.displayName.text} - ${place.rating}⭐ - ${place.address}</li>
         </c:forEach>
 
     </ul>

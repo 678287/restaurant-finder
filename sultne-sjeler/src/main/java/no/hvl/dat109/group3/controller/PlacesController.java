@@ -1,4 +1,4 @@
-package no.hvl.dat109.group3.restcontroller;
+package no.hvl.dat109.group3.controller;
 
 
 
@@ -29,12 +29,16 @@ public class PlacesController {
 	
 	
 	@GetMapping("/searchText")
-	public Object searchText(@RequestParam String query) {
-		return placesService.searchByText(query);
+	public String searchText(@RequestParam String query, Model model) {
+		List<Place> places = placesService.searchByText(query);
+		
+		model.addAttribute("places", places);
+		
+		return "listeresultat";
 	}
 	
 	@GetMapping("/searchNearby")
-	public Object searchNearby(@RequestParam String lat, @RequestParam String lon, Model model){
+	public String searchNearby(@RequestParam String lat, @RequestParam String lon, Model model){
 		
 		List<Place> places = placesService.searchNearby(lat, lon);
 		
@@ -42,5 +46,10 @@ public class PlacesController {
 	    
 	    return "listeresultat";
 	}
+	
+	/*@GetMapping("/getRandom")
+	public String getRandom(@RequestParam String lat, @RequestParam String lon, Model model) {
+		
+	}*/
 
 }

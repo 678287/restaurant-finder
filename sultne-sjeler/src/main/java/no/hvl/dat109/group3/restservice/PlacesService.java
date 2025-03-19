@@ -108,9 +108,16 @@ public class PlacesService {
 	    }
 	}
 	
-	/*public JsonNode giveRandom(String latitude, String longitude) {
+	public Place getRandom(String latitude, String longitude) {
 		
-	}*/
+		List<Place> places = searchNearby(latitude, longitude);
+		
+		int range = places.size() - 0 + 1;
+		int i = (int)(Math.random() * range) + 1;
+		
+		return places.get(i);
+		
+	}
 	
 	
 	private List<Place> convertJsonToPlaces(JsonNode jsonNode) {
