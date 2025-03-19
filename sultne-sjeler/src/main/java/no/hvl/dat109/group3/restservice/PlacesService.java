@@ -56,7 +56,11 @@ public class PlacesService {
 
 	}
 	
-	public JsonNode searchNearby(double lat, double lon) {
+	public JsonNode searchNearby(String latitude, String longitude) {
+		
+		double lat = Double.parseDouble(latitude);
+		double lon = Double.parseDouble(longitude);
+		
 	    // Request body in JSON format
 		String requestBody = "{ " +
 		        "\"includedTypes\": [\"restaurant\"], " + 
@@ -67,7 +71,7 @@ public class PlacesService {
 		                    "\"latitude\": " + lat + ", " +
 		                    "\"longitude\": " + lon +
 		                "}, " +
-		                "\"radius\": 1500.0 " + // Search radius in meters
+		                "\"radius\": 5000.0 " + // Search radius in meters
 		            "} " +
 		        "} " +
 		    "}";

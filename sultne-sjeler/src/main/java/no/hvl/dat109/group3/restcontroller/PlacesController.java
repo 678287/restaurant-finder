@@ -33,11 +33,11 @@ public class PlacesController {
 	}
 	
 	@GetMapping("/searchNearby")
-	public ResponseEntity<?> searchNearby(@RequestParam double lat, @RequestParam double lon){
+	public ResponseEntity<?> searchNearby(@RequestParam String lat, @RequestParam String lon){
 		
-		System.out.println("Received request for lat: " + lat + ", lon: " + lon); // Debug log
-		
-		if (lat == 0 && lon == 0) {
+		System.out.println("Received request: lat=" + lat + ", lon=" + lon); // Debug log
+
+	    if (lat == null || lon == null) {
 	        return ResponseEntity.badRequest().body("Latitude and Longitude are required.");
 	    }
 		
