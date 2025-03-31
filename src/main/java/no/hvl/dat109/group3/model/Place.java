@@ -19,6 +19,15 @@ public class Place {
 
     @JsonProperty("displayName")
     private DisplayName displayName;  // Use DisplayName class instead of String
+    
+    @JsonProperty("cost")
+    private String cost; 
+
+    @JsonProperty("foodType")
+    private String foodType; 
+
+    @JsonProperty("visitorCount")
+    private String visitorCount; 
 
     public String getAddress() {
         return address;
@@ -50,5 +59,29 @@ public class Place {
 
     public void setDisplayName(DisplayName displayName) {
         this.displayName = displayName;
+    }
+    
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
+    }
+
+    public String getVisitorCount() {
+        return visitorCount;
+    }
+
+    public void setVisitorCount(String visitorCount) {
+        this.visitorCount = visitorCount;
     }
 }
