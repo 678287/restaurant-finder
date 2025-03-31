@@ -80,4 +80,6 @@ public class PlacesControllerTest {
         verify(placesService, times(1)).getRandom("lat", "lon", "radius");
         verifyNoMoreInteractions(placesService);
     }
+    
+ 
 }
