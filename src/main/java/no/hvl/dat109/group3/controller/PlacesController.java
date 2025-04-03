@@ -52,7 +52,7 @@ public class PlacesController {
     public String searchWithFilters(
             @RequestParam String query,
             @RequestParam(required = false) Double minRating,
-            @RequestParam(required = false) Double maxPrice,
+            @RequestParam(required = false) Integer maxPriceLevel,
             Model model) {
         
         List<Place> places = placesService.searchByText(query);
@@ -63,9 +63,9 @@ public class PlacesController {
                     .collect(Collectors.toList());
         }
         
-        if (maxPrice != null) {
+        if (maxPriceLevel != null) {
             places = places.stream()
-                    .filter(p -> p.getPriceRange() != null && p.getPriceRange().getMax() <= maxPrice)
+                    .filter(p -> p.getPriceLevel() != null && p.getPriceLevel() <= maxPriceLevel)
                     .collect(Collectors.toList());
         }
         

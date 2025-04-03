@@ -24,7 +24,7 @@ public class PlacesService {
     private final String TEXT_URL = "https://places.googleapis.com/v1/places:searchText";
     private final String NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby";
 
-    private final String FIELD_MASK = "places.displayName,places.formattedAddress,places.rating,places.priceRange,places.primaryType";
+    private final String FIELD_MASK = "places.displayName,places.formattedAddress,places.rating,places.price_level,places.primaryType";
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
