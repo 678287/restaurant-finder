@@ -26,6 +26,15 @@ public class PlacesController {
         this.placesService = placesService;
     }
 
+    @GetMapping("/kartresultat")
+    public String showMap(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
+        List<Place> places = placesService.searchNearby(lat, lon, radius);
+        model.addAttribute("places", places);
+        String staticMapUrl = placesService.getStaticMapUrl(places);
+        model.addAttribute("staticMapUrl", staticMapUrl);
+        return "kartresultat";
+}
+
     @GetMapping("/searchText")
     public String searchText(@RequestParam String query, Model model) {
         List<Place> places = placesService.searchByText(query);
@@ -52,7 +61,7 @@ public class PlacesController {
     public String searchWithFilters(
             @RequestParam String query,
             @RequestParam(required = false) Double minRating,
-            @RequestParam(required = false) Integer maxPriceLevel,
+            @RequestParam(required = false) Double maxPrice,
             Model model) {
         
         List<Place> places = placesService.searchByText(query);
@@ -63,9 +72,9 @@ public class PlacesController {
                     .collect(Collectors.toList());
         }
         
-        if (maxPriceLevel != null) {
+        if (maxPrice != null) {
             places = places.stream()
-                    .filter(p -> p.getPriceLevel() != null && p.getPriceLevel() <= maxPriceLevel)
+                    .filter(p -> p.getPriceRange() != null && p.getPriceRange().getMax() <= maxPrice)
                     .collect(Collectors.toList());
         }
         

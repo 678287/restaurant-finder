@@ -20,11 +20,12 @@ import no.hvl.dat109.group3.model.Place;
 public class PlacesService {
 
     private final String API_KEY = "AIzaSyAmRg7cpF8lrgX8jxDu56ZQ_QFSJe8rPLw";
+    private final String SM_API_KEY = "AIzaSyB2zPFMedluwV8FV3m2kqf8HldPGCQywDo";
 
     private final String TEXT_URL = "https://places.googleapis.com/v1/places:searchText";
     private final String NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby";
 
-    private final String FIELD_MASK = "places.displayName,places.formattedAddress,places.rating,places.price_level,places.primaryType";
+    private final String FIELD_MASK = "places.displayName,places.formattedAddress,places.rating,places.priceRange,places.primaryType,places.location";
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -84,6 +85,22 @@ public class PlacesService {
         int i = (int) (Math.random() * range) + 1;
         return places.get(i);
     }
+
+    public String getStaticMapUrl(List<Place> places) {
+    String baseUrl = "https://maps.googleapis.com/maps/api/staticmap?size=600x400";
+    StringBuilder markers = new StringBuilder();
+    if (places != null && !places.isEmpty()) {
+        for (Place place : places) {
+            
+            markers.append("&markers=color:red%7C")
+                   .append(place.getLatitude())
+                   .append(",")
+                   .append(place.getLongitude());
+        }
+    }
+    
+    return baseUrl + markers.toString() + "&key=" + SM_API_KEY;
+}
 
     private List<Place> convertJsonToPlaces(JsonNode jsonNode) {
         if (jsonNode.has("places")) {

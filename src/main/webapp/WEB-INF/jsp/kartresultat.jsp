@@ -10,12 +10,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Kartresultat</title>
-   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #map-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
+    <jsp:include page="header.jsp" />
     
-    <h2>Kartresultat</h2>
-    
-    
+    <div class="container mt-5">
+        <h2>Kartresultat</h2>
+        <div class="card">
+            <img id="map-img" src="${staticMapUrl}" class="card-img-top" alt="Map of restaurants">
+            <div class="card-body">
+                <p class="card-text">This map displays the locations of the restaurants.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

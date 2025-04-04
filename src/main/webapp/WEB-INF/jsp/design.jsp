@@ -13,6 +13,7 @@
    
 </head>
 <body>
+    <jsp:include page="header.jsp" />
     
     <h2>Design</h2>
     

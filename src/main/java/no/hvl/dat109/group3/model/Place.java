@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Place {
+
     @JsonProperty("formattedAddress")
     private String address;
 
@@ -15,12 +16,14 @@ public class Place {
     private String primaryType;
 
     @JsonProperty("displayName")
-    private DisplayName displayName;
+    private DisplayName displayName;  // Use DisplayName class instead of String
     
-    @JsonProperty("priceLevel")
-    private String priceLevelString;
+    @JsonProperty("priceRange")
+    private PriceRange priceRange;
 
-    // Getters and Setters
+    @JsonProperty("location")
+    private Location location;
+
     public String getAddress() {
         return address;
     }
@@ -52,38 +55,28 @@ public class Place {
     public void setDisplayName(DisplayName displayName) {
         this.displayName = displayName;
     }
-    
-    public void setPriceLevel(String priceLevel) {
-        this.priceLevelString = priceLevel;
-    }
-    
-    public String getPriceLevel1() {
-        return priceLevelString;
-    }
-    
 
-    public Integer getPriceLevel() {
-        if (priceLevelString == null) return null;
-        return switch (priceLevelString) {
-            case "PRICE_LEVEL_INEXPENSIVE" -> 1;
-            case "PRICE_LEVEL_MODERATE" -> 2;
-            case "PRICE_LEVEL_EXPENSIVE" -> 3;
-            case "PRICE_LEVEL_VERY_EXPENSIVE" -> 4;
-            default -> null;
-        };
+    public PriceRange getPriceRange() {
+        return priceRange;
     }
 
-    // Helper method for price level description
-    public String getPriceLevelDescription() {
-        Integer level = getPriceLevel();
-        if (level == null) return "Ikke tilgjengelig";
-        return switch (level) {
-            case 1 -> "Billig ($)";
-            case 2 -> "Moderat ($$)";
-            case 3 -> "Dyrt ($$$)";
-            case 4 -> "Veldig dyrt ($$$$)";
-            default -> "Ukjent prisnivå";
-        };
+    public void setPriceRange(PriceRange priceRange) {
+        this.priceRange = priceRange;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getLatitude() {
+        return (location != null) ? location.getLatitude() : 0.0;
+    }
+
+    public double getLongitude() {
+        return (location != null) ? location.getLongitude() : 0.0;
+    }
 }

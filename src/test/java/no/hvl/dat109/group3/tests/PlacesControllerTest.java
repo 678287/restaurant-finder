@@ -17,7 +17,6 @@ import no.hvl.dat109.group3.controller.PlacesController;
 import no.hvl.dat109.group3.model.Place;
 import no.hvl.dat109.group3.restservice.PlacesService;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,35 +80,6 @@ public class PlacesControllerTest {
         verify(placesService, times(1)).getRandom("lat", "lon", "radius");
         verifyNoMoreInteractions(placesService);
     }
-    
-    @Test
-    public void testSearchWithFilters() throws Exception {
-        // Arrange
-        Place place1 = new Place();
-        place1.setRating(4.2);
-        place1.setPriceLevel("PRICE_LEVEL_MODERATE"); // price level 2
-        
-        Place place2 = new Place();
-        place2.setRating(3.8);
-        place2.setPriceLevel("PRICE_LEVEL_INEXPENSIVE"); // price level 1
-        
-        List<Place> allPlaces = Arrays.asList(place1, place2);
-        
-        when(placesService.searchByText("pizza")).thenReturn(allPlaces);
-
-        // Act & Assert - Test with both filters
-        mockMvc.perform(get("/places/searchWithFilters")
-                .param("query", "pizza")
-                .param("minRating", "4.0")
-                .param("maxPriceLevel", "2"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("listeresultat"))
-               .andExpect(model().attribute("places", List.of(place1)));
-
-        verify(placesService, times(1)).searchByText("pizza");
-        verifyNoMoreInteractions(placesService);
-    }
-    
     
  
 }

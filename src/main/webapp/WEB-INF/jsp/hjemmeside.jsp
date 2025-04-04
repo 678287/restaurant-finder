@@ -10,21 +10,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Hjemmeside</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
    
 </head>
-<body>
+<body class="bg-light">
+    <jsp:include page="header.jsp" />
     
-    <h2>Hjemmeside</h2>
+    <div class="container mt-5">
+        <h2>Hjemmeside</h2>
+        <div class="row mt-2">
+            <div class="col-md-6 mt-3">
+                <form id="textForm" action="places/searchText" method="get" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="query" placeholder="Søk etter restauranter" class="form-control">
+                        <button class="btn btn-primary" type="submit">Søk</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <label for="radius" class="form-label">Radius (m) for restauranter nær deg:</label>
+                <input type="number" id="radius" placeholder="Meter" class="form-control mb-2">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-secondary" onclick="getLocation('searchNearby')">
+                        Vis restauranter nær deg
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="getLocation('getRandom')">
+                        Foreslå en tilfeldig restaurant
+                    </button>
+            </div>
+        </div>
+
+        <div id="currentLocation" class="mt-2 text-danger"></div>
     
-   
-    <form id="textForm" action="places/searchText" method="get">
-            <input type="text" name="query" placeholder="Søk etter restauranter">
-            <input type="submit" value="Søk">
-    </form><br>
-    <label for="radius">Radius (m) for restauranter nær deg:</label><br>
-    <input type="number" id="radius" placeholder="Meter">
-    <button onclick="getLocation('searchNearby')">Vis restauranter nær deg</button><br><br>
-    <button onclick="getLocation('getRandom')">Foreslå en tilfeldig restaurant</button>
     <script>
         
         function success(position, actionType){
@@ -81,6 +99,7 @@
             
         function error(){
             alert("Sorry, no position available");
+            document.getElementById("currentLocation").innerText = "Beklager, kunne ikke hente posisjon.";
         }
         
         
