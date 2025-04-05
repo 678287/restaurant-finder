@@ -8,12 +8,16 @@
     <meta charset="UTF-8">
     <title>Listeresultat</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!--
     <style>
-        .filter-box { margin: 20px 0; padding: 10px; background: #f5f5f5; }
+        .price-available {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .price-unavailable {
+            color: #6c757d;
+            font-style: italic;
+        }
     </style>
-    -->
 </head>
 <body class="bg-light">
     <jsp:include page="header.jsp" />
@@ -21,7 +25,7 @@
     <div class="container mt-5">
         <h2>Listeresultat</h2>
     
-    <!-- Enkel filtrering -->
+        <!-- Filter Section -->
         <div class="card mb-4">
             <div class="card-body">
                 <form action="searchWithFilters" method="get" class="row g-3">
@@ -38,10 +42,10 @@
                         <label for="maxPrice" class="form-label">Max. pris:</label>
                         <select name="maxPrice" id="maxPrice" class="form-select">
                             <option value="">Alle</option>
-                            <option value="1" ${param.maxPrice == '1' ? 'selected' : ''}>1</option>
-                            <option value="2" ${param.maxPrice == '2' ? 'selected' : ''}>2</option>
-                            <option value="3" ${param.maxPrice == '3' ? 'selected' : ''}>3</option>
-                            <option value="4" ${param.maxPrice == '4' ? 'selected' : ''}>4</option>
+                            <option value="100" ${param.maxPrice == '100' ? 'selected' : ''}>Under 100 NOK</option>
+                            <option value="200" ${param.maxPrice == '200' ? 'selected' : ''}>Under 200 NOK</option>
+                            <option value="300" ${param.maxPrice == '300' ? 'selected' : ''}>Under 300 NOK</option>
+                            <option value="400" ${param.maxPrice == '400' ? 'selected' : ''}>Under 400 NOK</option>
                         </select>
                     </div>
                     <div class="col-md-4 d-flex align-items-end">
@@ -52,6 +56,7 @@
             </div>
         </div>
 
+        <!-- Results List -->
         <div class="list-group">
             <c:choose>
                 <c:when test="${not empty places}">
@@ -62,13 +67,13 @@
                                 <small>${place.rating}⭐</small>
                             </div>
                             <p class="mb-1">${place.address}</p>
-                            <small>
+                            <small class="${place.priceRange != null ? 'price-available' : 'price-unavailable'}">
                                 <c:choose>
                                     <c:when test="${place.priceRange != null}">
-                                        ${place.priceRange.min} - ${place.priceRange.max}
+                                        ${place.priceRange.min} - ${place.priceRange.max} NOK
                                     </c:when>
                                     <c:otherwise>
-                                        Ikke tilgjengelig
+                                        Pris ikke tilgjengelig
                                     </c:otherwise>
                                 </c:choose>
                             </small>
