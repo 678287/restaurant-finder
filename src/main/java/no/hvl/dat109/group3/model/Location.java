@@ -1,4 +1,7 @@
 package no.hvl.dat109.group3.model;
+/**
+ * An entity class to handle the format of Location when converting from JSON to POJO
+ */
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

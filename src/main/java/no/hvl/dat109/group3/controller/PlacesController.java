@@ -1,5 +1,9 @@
 package no.hvl.dat109.group3.controller;
 
+/**
+ * A controller class for controlling the service handling the "Places API"
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,14 +40,29 @@ public class PlacesController {
         return "kartresultat";
 }
 
+    /**
+	 * A GET-mapping to handle textbased searches
+	 * @param query The text input by the user
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
     @GetMapping("/searchText")
     public String searchText(@RequestParam String query, Model model) {
         List<Place> places = placesService.searchByText(query);
         model.addAttribute("places", places);
         model.addAttribute("query", query);
         return "listeresultat";
-    }
+    } //end searchText
+    
 
+    /**
+	 * A GET-mapping to search for all nearby restaurants
+	 * @param lat The latitude of the user location
+	 * @param lon The longitude of the user location
+	 * @param radius The radius for the search
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
     @GetMapping("/searchNearby")
     public String searchNearby(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
         List<Place> places = placesService.searchNearby(lat, lon, radius);
@@ -52,15 +71,36 @@ public class PlacesController {
         model.addAttribute("lat", lat);
         model.addAttribute("radius", radius);
         return "listeresultat";
-    }
-
+    } //end searchNearby
+	
+	
+	/**
+	 * A GET-mapping to generate a random suggestion for the user
+	 * @param lat The latitude of the user location
+	 * @param lon The longitude of the user location
+	 * @param radius The radius for the search
+	 * @param model
+	 * @return "listeresultat.jsp" - The view containing a list of results
+	 */
     @GetMapping("/getRandom")
     public String getRandom(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
         Place randomPlace = placesService.getRandom(lat, lon, radius);
         model.addAttribute("place", randomPlace);
         return "randomresultat";
-    }
+    } //end getRandom
+    
 
+    /**
+     * 
+     * @param query Query-string if search was text-based
+     * @param lat Latitude if search was location based
+     * @param lon Longitude if search was location based
+     * @param radius Radius if search was location based
+     * @param minRating Minimum rating for filter
+     * @param maxPrice Max price for filter
+     * @param model 
+     * @return listeresultat.jsp - The view containing a list of filtered results
+     */
     @GetMapping("/searchWithFilters")
     public String searchWithFilters(
             @RequestParam(required = false) String query,
@@ -100,5 +140,5 @@ public class PlacesController {
         model.addAttribute("radius", radius);
         
         return "listeresultat";
-    }
+    } //end searchWithFilters
 }

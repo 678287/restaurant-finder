@@ -1,5 +1,7 @@
 package no.hvl.dat109.group3.model;
-
+/**
+ * An entity class for a POJO to be used when converting from JSON to POJO
+ */
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

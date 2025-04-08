@@ -1,5 +1,9 @@
 package no.hvl.dat109.group3.restservice;
 
+/**
+ * A service class to handle API calls to Places API.
+ */
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +39,11 @@ public class PlacesService {
         this.objectMapper = objectMapper;
     }
 
+    /**
+	 * A method for searching by text input
+	 * @param query The text input by the user
+	 * @return A list of places
+	 */
     public List<Place> searchByText(String query) {
         String requestBody = "{ " + "\"textQuery\": \"" + query + "\", " + "\"includedType\": \"restaurant\", "
                 + "\"maxResultCount\": 20 " + "}";
@@ -53,8 +62,17 @@ public class PlacesService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse API response", e);
         }
-    }
-
+    }// end searchByText
+	
+	
+	
+	/**
+	 * A method for showing all nearby restaurants
+	 * @param latitude The latitude of the user location
+	 * @param longitude The longitude of the user location
+	 * @param radius The radius for the search
+	 * @return A list of places
+	 */
     public List<Place> searchNearby(String latitude, String longitude, String radius) {
         double lat = Double.parseDouble(latitude);
         double lon = Double.parseDouble(longitude);
@@ -77,31 +95,53 @@ public class PlacesService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse API response", e);
         }
-    }
-
+    }//end searchNearby
+	
+	
+	
+	/**
+	 * A method to generate a random suggestion for a restaurant near the user
+	  * @param latitude The latitude of the user location
+	 * @param longitude The longitude of the user location
+	 * @param radius The radius for the search
+	 * @return A random place
+	 */
     public Place getRandom(String latitude, String longitude, String radius) {
         List<Place> places = searchNearby(latitude, longitude, radius);
         int range = places.size() - 0 + 1;
         int i = (int) (Math.random() * range) + 1;
         return places.get(i);
-    }
+    } //end getRandom
+    
 
+    /**
+     * A method to get the URL for the static map view
+     * @param places The list of places to be pinned on the map
+     * @return A string containing the URL
+     */
     public String getStaticMapUrl(List<Place> places) {
-    String baseUrl = "https://maps.googleapis.com/maps/api/staticmap?size=600x400";
-    StringBuilder markers = new StringBuilder();
-    if (places != null && !places.isEmpty()) {
-        for (Place place : places) {
+    	String baseUrl = "https://maps.googleapis.com/maps/api/staticmap?size=600x400";
+    	StringBuilder markers = new StringBuilder();
+    	
+    	if (places != null && !places.isEmpty()) {
+    		for (Place place : places) {
             
             markers.append("&markers=color:red%7C")
                    .append(place.getLatitude())
                    .append(",")
                    .append(place.getLongitude());
-        }
-    }
+    		}
+    	}
     
-    return baseUrl + markers.toString() + "&key=" + SM_API_KEY;
-}
+    	return baseUrl + markers.toString() + "&key=" + SM_API_KEY;
+    } //end getStaticMapUrl
 
+
+	/**
+	 * A utility method for convering from a JsonNode to a list of POJOs
+	 * @param jsonNode
+	 * @return A list of Places
+	 */
     private List<Place> convertJsonToPlaces(JsonNode jsonNode) {
         if (jsonNode.has("places")) {
             try {
@@ -112,5 +152,5 @@ public class PlacesService {
             }
         }
         return List.of();
-    }
+    } //end convertJsonToPlaces
 }
