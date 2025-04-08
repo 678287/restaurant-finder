@@ -31,15 +31,38 @@ public class PlacesController {
         this.placesService = placesService;
     }
 
+    
+    /**
+     * 
+     * @param lat The latitude of the user location
+     * @param lon The longitude of the user location
+     * @param radius The radius for the search
+     * @param model
+     * @return "kartresultat.jsp" - The view showing a map of the results
+     */
     @GetMapping("/kartresultat")
-    public String showMap(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
-        List<Place> places = placesService.searchNearby(lat, lon, radius);
+    public String showMap(@RequestParam(required = false) String query,
+    					@RequestParam(required = false) String lat,
+    					@RequestParam(required = false) String lon,
+    					@RequestParam(required = false) String radius,
+    					Model model) {
+    	 List<Place> places = new ArrayList<>();
+         
+         
+         if(query == "") {
+         	places = placesService.searchNearby(lat, lon, radius);
+         } else {
+         	places = placesService.searchByText(query);
+         }
+         
+        
         model.addAttribute("places", places);
         String staticMapUrl = placesService.getStaticMapUrl(places);
         model.addAttribute("staticMapUrl", staticMapUrl);
         return "kartresultat";
-}
+    } //end showMap
 
+    
     /**
 	 * A GET-mapping to handle textbased searches
 	 * @param query The text input by the user
@@ -112,7 +135,7 @@ public class PlacesController {
             Model model) {
         
         List<Place> places = new ArrayList<>();
-        System.out.println(query);
+     
         
         if(query == "") {
         	places = placesService.searchNearby(lat, lon, radius);

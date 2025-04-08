@@ -24,6 +24,13 @@
 
     <div class="container mt-5">
         <h2>Listeresultat</h2>
+        <form action="kartresultat" method="get">
+            <input type="hidden" name="query" value="${query}">
+            <input type="hidden" name="lat" value="${lat}">
+            <input type="hidden" name="lon" value="${lon}">
+            <input type="hidden" name="radius" value="${radius}">
+            <input type="submit" value="Vis kartoversikt">
+        </form>
     
         <!-- Filter Section -->
         <div class="card mb-4">
