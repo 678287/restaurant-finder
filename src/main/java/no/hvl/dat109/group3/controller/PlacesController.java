@@ -1,5 +1,6 @@
 package no.hvl.dat109.group3.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,9 @@ public class PlacesController {
     public String searchNearby(@RequestParam String lat, @RequestParam String lon, @RequestParam String radius, Model model) {
         List<Place> places = placesService.searchNearby(lat, lon, radius);
         model.addAttribute("places", places);
+        model.addAttribute("lon", lon);
+        model.addAttribute("lat", lat);
+        model.addAttribute("radius", radius);
         return "listeresultat";
     }
 
@@ -59,12 +63,23 @@ public class PlacesController {
 
     @GetMapping("/searchWithFilters")
     public String searchWithFilters(
-            @RequestParam String query,
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String lat,
+            @RequestParam(required = false) String lon,
+            @RequestParam(required = false) String radius,
             @RequestParam(required = false) Double minRating,
             @RequestParam(required = false) Double maxPrice,
             Model model) {
         
-        List<Place> places = placesService.searchByText(query);
+        List<Place> places = new ArrayList<>();
+        System.out.println(query);
+        
+        if(query == "") {
+        	places = placesService.searchNearby(lat, lon, radius);
+        } else {
+        	places = placesService.searchByText(query);
+        }
+        
         
         if (minRating != null) {
             places = places.stream()
@@ -80,6 +95,10 @@ public class PlacesController {
         
         model.addAttribute("places", places);
         model.addAttribute("query", query);
+        model.addAttribute("lon", lon);
+        model.addAttribute("lat", lat);
+        model.addAttribute("radius", radius);
+        
         return "listeresultat";
     }
 }

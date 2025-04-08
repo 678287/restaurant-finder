@@ -37,7 +37,7 @@ public class LoginUtil {
 		
 		
 		
-		sesjon.setMaxInactiveInterval(120); // Bruker logges ut etter 2 minutter med inaktivitet
+		sesjon.setMaxInactiveInterval(240); // Bruker logges ut etter 4 minutter med inaktivitet
 	} //end loggInnBruker
 	
 	

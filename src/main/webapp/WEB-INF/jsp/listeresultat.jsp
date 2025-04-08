@@ -30,6 +30,9 @@
             <div class="card-body">
                 <form action="searchWithFilters" method="get" class="row g-3">
                     <input type="hidden" name="query" value="${query}">
+                    <input type="hidden" name="lat" value="${lat}">
+                    <input type="hidden" name="lon" value="${lon}">
+                    <input type="hidden" name="radius" value="${radius}">
                     <div class="col-md-4">
                         <label for="minRating" class="form-label">Min. rating:</label>
                         <select name="minRating" id="minRating" class="form-select">
