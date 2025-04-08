@@ -25,6 +25,7 @@ public class PlacesService {
 
     private final String API_KEY = "AIzaSyAmRg7cpF8lrgX8jxDu56ZQ_QFSJe8rPLw";
     private final String SM_API_KEY = "AIzaSyB2zPFMedluwV8FV3m2kqf8HldPGCQywDo";
+    private final String JS_MAPS_API_KEY = "AIzaSyAMrl0FSl-JZUbQKxM83dy6eLj4dqHlA4A";
 
     private final String TEXT_URL = "https://places.googleapis.com/v1/places:searchText";
     private final String NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby";
@@ -114,6 +115,20 @@ public class PlacesService {
     } //end getRandom
     
 
+    /*public String getDynamicMapUrl(String query, String radius, String lat, String lon) {
+    	String baseUrl = "https://www.google.com/maps/embed/v1/MAP_MODE?";
+    	StringBuilder markers = new StringBuilder();
+    	
+    	if(query == "") {
+    		markers.append("&search")
+    	} else {
+    		
+    	}
+    	
+    	
+    	return baseUrl + "key=" + DM_API_KEY + markers;
+    }
+    */
     /**
      * A method to get the URL for the static map view
      * @param places The list of places to be pinned on the map
