@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 
 import no.hvl.dat109.group3.controller.PlacesController;
 import no.hvl.dat109.group3.model.Place;
-import no.hvl.dat109.group3.restservice.PlacesService;
+import no.hvl.dat109.group3.service.PlacesService;
 
 import java.util.Collections;
 import java.util.List;

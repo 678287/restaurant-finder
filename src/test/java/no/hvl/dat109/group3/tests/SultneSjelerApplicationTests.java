@@ -11,7 +11,7 @@ import no.hvl.dat109.group3.controller.PlacesController;
 import no.hvl.dat109.group3.controller.RegisterController;
 import no.hvl.dat109.group3.controller.SearchController;
 import no.hvl.dat109.group3.service.PasswordService;
-import no.hvl.dat109.group3.restservice.PlacesService;
+import no.hvl.dat109.group3.service.PlacesService;
 
 /**
  * This test class verifies that the Spring Boot application context loads correctly

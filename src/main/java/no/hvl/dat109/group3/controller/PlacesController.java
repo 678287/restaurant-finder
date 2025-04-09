@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import no.hvl.dat109.group3.model.Place;
-import no.hvl.dat109.group3.restservice.PlacesService;
+import no.hvl.dat109.group3.service.PlacesService;
 
 @Controller
 @RequestMapping("/places")

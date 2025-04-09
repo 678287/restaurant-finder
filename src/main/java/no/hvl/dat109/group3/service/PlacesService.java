@@ -1,4 +1,4 @@
-package no.hvl.dat109.group3.restservice;
+package no.hvl.dat109.group3.service;
 
 /**
  * A service class to handle API calls to Places API.
