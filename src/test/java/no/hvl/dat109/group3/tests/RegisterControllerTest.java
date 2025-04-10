@@ -21,6 +21,16 @@ import no.hvl.dat109.group3.model.Users;
 import no.hvl.dat109.group3.repository.UserRepository;
 import no.hvl.dat109.group3.service.PasswordService;
 
+/**
+ * Test class for RegisterController.
+ * Verifies user registration functionality including:
+ * - Displaying the registration form
+ * - Successful user registration
+ * - Handling of registration failures (duplicate phone numbers)
+ * 
+ * Uses MockMvc for HTTP request simulation and Mockito for dependency mocking.
+ */
+
 public class RegisterControllerTest {
 
     private MockMvc mockMvc;

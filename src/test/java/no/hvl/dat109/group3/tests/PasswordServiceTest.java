@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import no.hvl.dat109.group3.service.PasswordService;
 
+/**
+ * Test class for PasswordService}.
+ * Verifies the password-related functionality including:
+ * - Salt generation
+ * - Password hashing
+ * - Password verification
+ */
+
 public class PasswordServiceTest {
 
     private PasswordService passwordService;

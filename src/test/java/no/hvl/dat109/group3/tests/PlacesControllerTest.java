@@ -20,6 +20,16 @@ import no.hvl.dat109.group3.service.PlacesService;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Test class for PlacesController.
+ * Tests the functionality for place-related operations including:
+ * - Text based place search
+ * - Nearby place search
+ * - Random place selection
+ * 
+ * Uses MockMvc for controller testing and Mockito for service mocking.
+ */
+
 public class PlacesControllerTest {
 
     private MockMvc mockMvc;

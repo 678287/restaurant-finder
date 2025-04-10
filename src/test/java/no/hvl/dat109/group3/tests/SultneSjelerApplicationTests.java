@@ -14,8 +14,13 @@ import no.hvl.dat109.group3.service.PasswordService;
 import no.hvl.dat109.group3.service.PlacesService;
 
 /**
- * This test class verifies that the Spring Boot application context loads correctly
- * and ensures that all necessary beans are created. 
+ * Integration test class for the main application.
+ * Verifies that the Spring application context loads correctly
+ * and that all required beans are properly initialized.
+ * 
+ * Tests the presence and proper wiring of:
+ * - Controllers
+ * - Services
  */
 
 @SpringBootTest

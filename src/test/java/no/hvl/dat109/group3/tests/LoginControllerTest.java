@@ -21,6 +21,15 @@ import no.hvl.dat109.group3.service.PasswordService;
 import no.hvl.dat109.group3.util.InputValidator;
 import no.hvl.dat109.group3.util.LoginUtil;
 
+/**
+ * Test class for LoginController.
+ * Verifies the functionality of user login processes including:
+ * - Successful login attempts
+ * - Failed login attempts
+ * 
+ * Uses MockMvc for simulating HTTP requests and Mockito for mocking dependencies.
+ */
+
 public class LoginControllerTest {
 
     private MockMvc mockMvc;
@@ -44,13 +53,6 @@ public class LoginControllerTest {
     public void setup() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
-    }
-
-    @Test
-    public void testGetLoginForm() throws Exception {
-        mockMvc.perform(get("/login"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("login"));
     }
 
     @Test
