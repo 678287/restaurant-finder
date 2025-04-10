@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Place {
 
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("formattedAddress")
     private String address;
 
@@ -25,6 +28,14 @@ public class Place {
 
     @JsonProperty("location")
     private Location location;
+
+     public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getAddress() {
         return address;

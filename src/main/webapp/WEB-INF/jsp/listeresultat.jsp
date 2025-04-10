@@ -77,6 +77,16 @@
                                 <small>${place.rating}⭐</small>
                             </div>
                             <p class="mb-1">${place.address}</p>
+                            <form method="post" action="${pageContext.request.contextPath}/favorite/add">
+                                <input type="hidden" name="restaurantId" value="${place.id}" />
+                                <input type="hidden" name="displayName" value="${place.displayName.text}" />
+                                <input type="hidden" name="address" value="${place.address}" />
+                                <input type="hidden" name="rating" value="${place.rating}" />
+                                <input type="hidden" name="latitude" value="${place.latitude}" />
+                                <input type="hidden" name="longitude" value="${place.longitude}" />
+                                <button type="submit" class="btn btn-primary">Add to Favorites</button>
+                            </form>
+
                             <small class="${place.priceRange != null ? 'price-available' : 'price-unavailable'}">
                                 <c:choose>
                                     <c:when test="${place.priceRange != null}">
