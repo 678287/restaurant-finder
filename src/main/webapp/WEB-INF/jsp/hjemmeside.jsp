@@ -18,6 +18,15 @@
     
     <div class="container mt-5">
         <h2>Hjemmeside</h2>
+        
+        <c:if test="${not empty sessionScope.username}">
+            <div class="mt-3 mb-4">
+                <a href="/favorite/list" class="btn btn-primary">
+                    <i class="bi bi-heart-fill"></i> Mine favoritter
+                </a>
+            </div>
+        </c:if>
+        
         <div class="row mt-2">
             <div class="col-md-6 mt-3">
                 <form id="textForm" action="places/searchText" method="get" class="mb-3">
