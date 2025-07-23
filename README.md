@@ -1,7 +1,7 @@
 Restaurant Finder
 A web application that helps users discover nearby restaurants with filtering, random suggestions, and favorites.
 
-Collaborators
+Collaborators  
 Magne Svalland
 
 Hans Christian Gustafsson
@@ -9,7 +9,7 @@ Hans Christian Gustafsson
 Jonatan Dam	
 
 
-Features
+Features  
 Map View: Visualize restaurants in a selected area.
 
 List View: Browse restaurants with filtering options.
@@ -20,7 +20,7 @@ Favorites: Save favorite restaurants (requires login).
 
 Adjustable Radius: Expand or narrow search results by changing the radius.
 
-Technologies
+Technologies  
 Backend: Spring MVC, Spring JPA
 
 Database: PostgreSQL
