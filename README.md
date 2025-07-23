@@ -29,24 +29,24 @@ Frontend: JSP (Jakarta Server Pages)
 
 API: Google Places API (for restaurant data)
 
-8.0 Functionality Demonstration  
-8.1 Homepage
+Functionality Demonstration  
+Homepage
 <img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/fa26cf01-30be-4c12-859e-c0b5ec328c2d" />
 
 
-8.2 Register/Login
+Register/Login
 <img width="945" height="464" alt="image" src="https://github.com/user-attachments/assets/3ac76820-12e4-40d9-8a49-c111ffdf7a75" />
 <img width="945" height="463" alt="image" src="https://github.com/user-attachments/assets/ff67cd82-a9ac-4e30-9a40-2436dbf65c4c" />
 
-8.3 Display List Overview
+Display List Overview
 <img width="945" height="463" alt="image" src="https://github.com/user-attachments/assets/b2d46ba9-48f0-4127-bb51-dd9d855ca3cc" />
 
 
-8.4 Filter Restaurants
+Filter Restaurants
 <img width="949" height="464" alt="image" src="https://github.com/user-attachments/assets/172d6cb6-fbde-4476-8f96-96bcc2c4e6d5" />
 
 
-8.5 Add to Favorites
+Add to Favorites
 This feature requires the user to be logged in
 <img width="630" height="186" alt="image" src="https://github.com/user-attachments/assets/97f66b21-2944-4c3a-985d-1c6b12a1f4b5" />
 
@@ -57,14 +57,14 @@ When logged in, the user will also have access to the "My Favorites" button on t
 
 
 
-8.6 Display Map Overview
+Display Map Overview
 <img width="889" height="435" alt="image" src="https://github.com/user-attachments/assets/bf312c3f-249a-4057-9255-2a307c07c4d3" />
 
 
-8.7 Get Random Restaurant
+Get Random Restaurant
 <img width="898" height="375" alt="image" src="https://github.com/user-attachments/assets/1c86de4c-a7e9-4adb-a862-c7cc6935d3a4" />
 
 
-8.8 Change Search Radius
+Change Search Radius
 <img width="954" height="54" alt="image" src="https://github.com/user-attachments/assets/373d3525-6e81-4821-b73f-171f352c2fd2" />
 
