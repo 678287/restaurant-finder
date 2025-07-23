@@ -1,7 +1,7 @@
-Restaurant Finder  
+## Restaurant Finder  
 A web application that helps users discover nearby restaurants with filtering, random suggestions, and favorites.
 
-Collaborators  
+## Collaborators
 Magne Svalland
 
 Hans Christian Gustafsson
@@ -9,7 +9,7 @@ Hans Christian Gustafsson
 Jonatan Dam	
 
 
-Features  
+## Features  
 Map View: Visualize restaurants in a selected area.
 
 List View: Browse restaurants with filtering options.
@@ -20,7 +20,7 @@ Favorites: Save favorite restaurants (requires login).
 
 Adjustable Radius: Expand or narrow search results by changing the radius.
 
-Technologies  
+## Technologies  
 Backend: Spring MVC, Spring JPA
 
 Database: PostgreSQL
@@ -29,7 +29,7 @@ Frontend: JSP (Jakarta Server Pages)
 
 API: Google Places API (for restaurant data)
 
-Functionality Demonstration  
+## Functionality Demonstration  
 Homepage
 <img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/fa26cf01-30be-4c12-859e-c0b5ec328c2d" />
 
