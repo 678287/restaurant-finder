@@ -58,7 +58,6 @@ When logged in, the user will also have access to the "My Favorites" button on t
 
 
 8.6 Display Map Overview
-<img width="169" height="67" alt="image" src="https://github.com/user-attachments/assets/16843597-35fc-4390-b17e-640fa54a8336" />
 <img width="889" height="435" alt="image" src="https://github.com/user-attachments/assets/bf312c3f-249a-4057-9255-2a307c07c4d3" />
 
 
