@@ -1,4 +1,4 @@
-Restaurant Finder
+Restaurant Finder  
 A web application that helps users discover nearby restaurants with filtering, random suggestions, and favorites.
 
 Collaborators  
@@ -29,7 +29,7 @@ Frontend: JSP (Jakarta Server Pages)
 
 API: Google Places API (for restaurant data)
 
-8.0 Functionality Demonstration
+8.0 Functionality Demonstration  
 8.1 Homepage
 <img width="945" height="398" alt="image" src="https://github.com/user-attachments/assets/fa26cf01-30be-4c12-859e-c0b5ec328c2d" />
 
